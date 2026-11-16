@@ -2,11 +2,10 @@ package io.mihaijulien.library_management_api.controller;
 
 import io.mihaijulien.library_management_api.model.dto.BookDto;
 import io.mihaijulien.library_management_api.service.BookService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
@@ -19,8 +18,10 @@ public class BookController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<BookDto>> getAllBooks(){
-        return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
+    public ResponseEntity<Page<BookDto>> getAllBooks(
+            @RequestParam(defaultValue = "0") int pageNo,
+            @RequestParam(defaultValue = "5") int pageSize){
+        return new ResponseEntity<>(bookService.getAllBooks(pageNo, pageSize), HttpStatus.OK);
     }
 
     @GetMapping("/{bookId}")

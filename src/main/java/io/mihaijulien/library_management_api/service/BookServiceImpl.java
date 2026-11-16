@@ -8,9 +8,10 @@ import io.mihaijulien.library_management_api.service.exception.BookNotFoundExcep
 import io.mihaijulien.library_management_api.service.exception.ErrorMessage;
 import io.mihaijulien.library_management_api.service.exception.InvalidBookException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -23,9 +24,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public List<BookDto> getAllBooks() {
-        var books = bookRepository.findAll();
-        return books.stream().map(BookMapper::toDto).toList();
+    public Page<BookDto> getAllBooks(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return bookRepository.findAll(pageable).map(BookMapper::toDto);
     }
 
     @Override

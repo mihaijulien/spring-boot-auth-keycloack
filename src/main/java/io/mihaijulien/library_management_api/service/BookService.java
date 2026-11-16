@@ -1,11 +1,10 @@
 package io.mihaijulien.library_management_api.service;
 
 import io.mihaijulien.library_management_api.model.dto.BookDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface BookService {
-    public List<BookDto> getAllBooks();
+    Page<BookDto> getAllBooks(int pageNo, int pageSize);
     BookDto getBookById(Long id);
     BookDto addBook(BookDto bookDto);
 }
