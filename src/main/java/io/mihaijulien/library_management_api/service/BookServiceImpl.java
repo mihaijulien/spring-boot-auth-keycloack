@@ -1,5 +1,7 @@
 package io.mihaijulien.library_management_api.service;
 
+import io.mihaijulien.library_management_api.mapper.BookMapper;
+import io.mihaijulien.library_management_api.model.dto.BookDto;
 import io.mihaijulien.library_management_api.model.entity.Book;
 import io.mihaijulien.library_management_api.repository.BookRepository;
 import jakarta.transaction.Transactional;
@@ -18,7 +20,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<BookDto> getAllBooks() {
+        var books = bookRepository.findAll();
+        return books.stream().map(BookMapper::toDto).toList();
     }
 }
