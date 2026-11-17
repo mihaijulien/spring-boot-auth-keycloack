@@ -1,4 +1,4 @@
-package io.mihaijulien.library_management_api.swagger;
+package io.mihaijulien.library_management_api.configuration.swagger;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
