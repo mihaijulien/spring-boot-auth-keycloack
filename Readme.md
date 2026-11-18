@@ -48,3 +48,9 @@ for another _access_token_ (therefore the user doesn't resign-in but the access_
 **token_type**: Bearer: Send the access token using the Bearer authentication scheme.
 
 **scope**: email profile: Granted scopes.
+
+**Authenticated request:**
+
+Get the access token from the Keycloak endpoint above and added it to the requests as Bearer token:
+
+![auth_request](docs/screenshots/authenticated_request.png)
