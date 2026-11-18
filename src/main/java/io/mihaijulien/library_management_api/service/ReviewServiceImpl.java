@@ -31,9 +31,8 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
         Review savedReview = ReviewDto.fromDto(reviewDto);
+        savedReview.setUserEmail(userEmail);
 
-        reviewRepository.save(savedReview);
-
-        return reviewDto;
+        return ReviewDto.toDto(reviewRepository.save(savedReview));
     }
 }
