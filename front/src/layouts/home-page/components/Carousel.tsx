@@ -16,7 +16,7 @@ export const Carousel = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
-          "http://localhost:8080/api/books/?pageNo=0&pageSize=3"
+          "http://localhost:8080/api/books?pageNo=0&pageSize=3"
       );
       if (!response.ok) {
         throw new Error("Fail to fetch books");
@@ -41,18 +41,20 @@ export const Carousel = () => {
       >
         {/* Desktop */}
         <div className="carousel-inner">
-          <div className="carousel-item active">
+
+          {books.map((book, index) => (
+          <div key={book.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
             <div className="row d-flex justify-content-center align-items-center">
               <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">
                 <div className="text-center">
                   <img
-                    src="/images/book-images/book-luv2code-1000.png"
+                    src={book.img}
                     width="151"
                     height="233"
                     alt="book"
                   />
-                  <h6 className="mt-2">Book</h6>
-                  <p>Library Management</p>
+                  <h6 className="mt-2">{book.title}</h6>
+                  <p>{book.author}</p>
                   <a className="btn main-color text-white" href="#">
                     Reserve
                   </a>
@@ -60,44 +62,7 @@ export const Carousel = () => {
               </div>
             </div>
           </div>
-          <div className="carousel-item">
-            <div className="row d-flex justify-content-center align-items-center">
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div className="text-center">
-                  <img
-                    src="/images/book-images/new-book-1.png"
-                    width="151"
-                    height="233"
-                    alt="book"
-                  />
-                  <h6 className="mt-2">Book</h6>
-                  <p>Library Management</p>
-                  <a className="btn main-color text-white" href="#">
-                    Reserve
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="carousel-item">
-            <div className="row d-flex justify-content-center align-items-center">
-              <div className="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3">
-                <div className="text-center">
-                  <img
-                    src="/images/book-images/new-book-2.png"
-                    width="151"
-                    height="233"
-                    alt="book"
-                  />
-                  <h6 className="mt-2">Book</h6>
-                  <p>Library Management</p>
-                  <a className="btn main-color text-white" href="#">
-                    Reserve
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
           <button
             className="carousel-control-prev"
             type="button"
