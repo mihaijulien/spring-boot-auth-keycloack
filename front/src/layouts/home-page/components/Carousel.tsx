@@ -1,4 +1,33 @@
+import { useEffect, useState } from 'react';
+import type { BookModel } from '../../../model/BookModel.ts';
+
+interface BookResponse {
+  content: BookModel[];
+  page: {
+    totalElements: number;
+    totalPages: number;
+  }
+}
+
 export const Carousel = () => {
+
+  const [books, setBooks] = useState<BookModel[]>([]);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const response = await fetch(
+          "http://localhost:8080/api/books/?pageNo=0&pageSize=3"
+      );
+      if (!response.ok) {
+        throw new Error("Fail to fetch books");
+      }
+      const data: BookResponse = await response.json();
+
+      setBooks(data.content);
+    };
+    fetchBooks();
+  }, []);
+
   return (
     <div className="container mt-5" style={{ height: 550 }}>
       <div className="homepage-carousel-title">
