@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { BookModel } from '../../../model/BookModel.ts';
+import { SpinnerLoading } from '../../../components/SpinnerLoading.tsx';
 
 interface BookResponse {
   content: BookModel[];
@@ -37,7 +38,7 @@ export const Carousel = () => {
   }, []);
 
   if(isLoading){
-    return <p>Loading...</p>;
+    return <SpinnerLoading/>
   }
 
   if(httpError){
