@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { BookModel } from '../../../model/BookModel.ts';
 import { SpinnerLoading } from '../../../components/SpinnerLoading.tsx';
-
-interface BookResponse {
-  content: BookModel[];
-  page: {
-    totalElements: number;
-    totalPages: number;
-  }
-}
+import { bookService } from '../../../services/bookService.ts';
 
 export const Carousel = () => {
 
@@ -19,13 +12,7 @@ export const Carousel = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch(
-            "http://localhost:8080/api/books?pageNo=0&pageSize=3"
-        );
-        if (!response.ok) {
-          throw new Error("Fail to fetch books");
-        }
-        const data: BookResponse = await response.json();
+        const data = await bookService.getBooks(0,3);
 
         setBooks(data.content);
         setIsLoading(false);
