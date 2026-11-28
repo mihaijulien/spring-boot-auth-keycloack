@@ -12,7 +12,16 @@
 
 
 **Steps**:
-1. Create a realm (eq. *LibraryKeycloak*)
+<details>
+<summary>realm-export.json</summary>
+
+```
+Import realm-export.json from Keycloak admin dashboard (Action > Partial import)
+```
+
+</details>
+
+1. Create a realm (eg. *LibraryKeycloak*)
 2. Create a user (Email verified On, Temporary Password off)
 3. Create client:
    * Client type: **OpenID Connect**
