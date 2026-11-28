@@ -4,10 +4,8 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 interface BookResponse {
     content: BookModel[];
-    page: {
-        totalElements: number;
-        totalPages: number;
-    }
+    totalElements: number;
+    totalPages: number;
 }
 
 export const bookService =  {
